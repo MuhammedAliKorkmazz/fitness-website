@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+    </style>
+    <link rel="stylesheet" href="girişyap.css"/>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+          <a href="#"><img src="assets/logo.png" alt="logo"></a>
+        </div>
+        <ul class="nav__links">
+          <li class="link"><a href="anasayfa.html">Anasayfa</a></li>
+          <li class="link"><a href="programlar.html">Program</a></li>
+          <li class="link"><a href="ürünler.html">Ürünler</a></li>
+        </ul>
+        <button class="btn" onclick="showForm('signup')">Şimdi Katıl</button>
+    </nav>
+
+    <div id="signup" class="container hidden">
+        <div class="form-container">
+            <h2>Kayıt Ol</h2>
+            <form>
+                <input type="text" placeholder="Adınız">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Şifre">
+                <button type="submit" class="btn">Kayıt Ol</button>
+            </form>
+            <p>Zaten üye misiniz? <a href="#" onclick="showForm('login')">Giriş Yap</a></p>
+        </div>
+    </div>
+
+    <!-- Giriş yap sayfasını başlangıçta görünür yapıyoruz -->
+    <div id="login" class="container">
+        <div class="form-container">
+            <h2>Giriş Yap</h2>
+            <form>
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Şifre">
+                <button type="submit" class="btn">Giriş Yap</button>
+            </form>
+            <p>Hesabınız yok mu? <a href="#" onclick="showForm('signup')">Kayıt Ol</a></p>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            document.getElementById('signup').classList.add('hidden');
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById(formId).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
