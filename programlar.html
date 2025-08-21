@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Egzersiz Kütüphanesi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="anasayfa.css"/>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+    --primary: #2563eb;
+    --secondary: #475569;
+    --background: #000000;
+    --card-bg: #ffffff;
+    --primary-color: #111317;
+    --primary-color-light: #1f2125;
+    --primary-color-extra-light: #35373b;
+    --secondary-color-dark: #000000;
+    --text-light: #d1d5db;
+    --white: #ffffff;
+    --max-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background);
+    color: black;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.tab {
+    padding: 12px 24px;
+    background-color: var(--card-bg);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.tab.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.exercise-card {
+    margin-bottom: 20px;
+    background-color: var(--card-bg);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.exercise-card:hover {
+    transform: translateY(-10px);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.exercise-info {
+    padding: 20px;
+}
+
+.exercise-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 10px;
+}
+
+.exercise-description {
+    font-size: 14px;
+    color: var(--secondary);
+    margin-top: 10px;
+}
+
+/* Button Styling */
+.btn {
+    padding: 1rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--white);
+    background-color: rgb(255, 191, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color-dark);
+}
+
+/* Additional Styles */
+.section__container {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 5rem 1rem;
+}
+
+.section__header {
+    margin-bottom: 1rem;
+    font-size: 2.25rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--white);
+}
+
+.section__subheader {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    color: var(--text-light);
+}
+
+a {
+    text-decoration: none;
+}
+
+.bg__blur {
+    position: absolute;
+    box-shadow: 0 0 1000px 50px var(--secondary-color);
+    z-index: -1;
+}
+
+nav {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.nav__logo {
+    max-width: 150px;
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+          <a href="anasayfa.html"><img src="assets/logo.png" alt="logo" /></a>
+        </div>
+        <ul class="nav__links">
+          <li class="link"><a href="anasayfa.html">Anasayfa</a></li>
+          <li class="link"><a href="programlar.html">Program</a></li>
+          <li class="link"><a href="ürünler.html">Ürünler</a></li>
+        </ul>
+        <button class="btn">Şimdi Katıl</button>
+      </nav>
+    <div class="container">
+        <div class="header">
+            <h1>Fitness Egzersiz Kütüphanesi</h1>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="chest">Göğüs</button>
+            <button class="tab" data-tab="back">Sırt</button>
+            <button class="tab" data-tab="legs">Bacak</button>
+            <button class="tab" data-tab="shoulders">Omuz</button>
+            <button class="tab" data-tab="arms">Kol</button>
+            <button class="tab" data-tab="core">Karın</button>
+        </div>
+
+        <!-- Göğüs -->
+        <div class="tab-content active" id="chest">
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/I9nG-G4B5Bs" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Bench Press</h3>
+                    <p class="exercise-description">Temel göğüs kası geliştirme egzersizi.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/eozdVDA78K0" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Incline Dumbbell Press</h3>
+                    <p class="exercise-description">Üst göğüs kasları için harika bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Nhvz9EzdJ4U" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Chest Fly</h3>
+                    <p class="exercise-description">Göğüs kaslarını izole eden bir hareket.</p>
+                </div>
+            </div>
+            
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Z57CtFmRMxA" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Cable Crossover</h3>
+                    <p class="exercise-description">Göğüs kaslarını sıkılaştıran bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/oXFK37PVXwI" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Push-Up</h3>
+                    <p class="exercise-description">Kendi vücut ağırlığınızla göğüs çalışması.</p>
+                </div>
+            </div>
+            
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/F3QY5vMz_6I" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Decline Bench Press</h3>
+                    <p class="exercise-description">Alt göğüs kaslarını çalıştıran bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/TgS5N5BtsXw" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Dumbbell Pullover</h3>
+                    <p class="exercise-description">Göğüs ve sırt kaslarını çalıştıran bir egzersiz.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sırt -->
+        <div class="tab-content" id="back">
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/E6Shm6lTlp0" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Pull-Up</h3>
+                    <p class="exercise-description">Sırt kaslarını güçlendiren klasik bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/GzU3XcKtvFo" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Deadlift</h3>
+                    <p class="exercise-description">Tüm vücut kaslarını çalıştıran temel hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/QF5aD7rxGYk" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Barbell Row</h3>
+                    <p class="exercise-description">Sırt kaslarını geliştirmek için etkili bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/rT7DgCr-3pg" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Seated Cable Row</h3>
+                    <p class="exercise-description">Sırt kaslarını hedefleyen bir makine egzersizi.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/F3QY5vMz_6I" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Lat Pulldown</h3>
+                    <p class="exercise-description">Sırt genişliğini artıran bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/f1Wc0MwBaJs" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">T-Bar Row</h3>
+                    <p class="exercise-description">Sırt kaslarını şekillendiren bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/LPWxs5xKnPQ" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Bent-Over Row</h3>
+                    <p class="exercise-description">Sırtı hedefleyen geleneksel bir egzersiz.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bacak -->
+        <div class="tab-content" id="legs">
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/2tXud-0ZYUE" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Squat</h3>
+                    <p class="exercise-description">Bacak kaslarını çalıştıran temel egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/SGEXVjF9BrA" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Leg Press</h3>
+                    <p class="exercise-description">Bacak kaslarını hedefleyen bir makine hareketi.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/fiPLy7Im3lY" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Lunges</h3>
+                    <p class="exercise-description">Bacak kaslarını geliştiren adım atma egzersizi.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/V0kEBNUrVJg" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Romanian Deadlift</h3>
+                    <p class="exercise-description">Hamstring kaslarını hedefleyen bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ZR4fRg74Kkg" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Leg Curl</h3>
+                    <p class="exercise-description">Arka bacak kaslarını çalıştıran egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ZR4fRg74Kkg" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Leg Extension</h3>
+                    <p class="exercise-description">Ön bacak kaslarını çalıştıran makine egzersizi.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/1VQXVY2QItM" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Bulgarian Split Squat</h3>
+                    <p class="exercise-description">Tek bacakla yapılan dengenizi zorlayan egzersiz.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Omuz -->
+        <div class="tab-content" id="shoulders">
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/mkQ_jt3y7lM" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Overhead Press</h3>
+                    <p class="exercise-description">Omuzları güçlendiren temel bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/gTq7HkwFmcY" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Lateral Raise</h3>
+                    <p class="exercise-description">Omuzların yan kısmını hedefleyen bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/OqknZ2F8L5I" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Front Raise</h3>
+                    <p class="exercise-description">Omuzların ön kısmını geliştiren bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/2FbJhTevvPA" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Arnold Press</h3>
+                    <p class="exercise-description">Omuzları şekillendiren etkili bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/gqRZ1uDZ0Yw" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Upright Row</h3>
+                    <p class="exercise-description">Omuz kaslarını sıkılaştıran bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/DTa_1HXYtYM" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Face Pull</h3>
+                    <p class="exercise-description">Omuz germe egzersizi.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/cHjt1tq2ESs" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Cable Lateral Raise</h3>
+                    <p class="exercise-description">Kabloyla yapılan lateral raise hareketi.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kol -->
+        <div class="tab-content" id="arms">
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/shorts/oZ-I2OlV_9Y" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Bicep Curl</h3>
+                    <p class="exercise-description">Biceps kaslarını hedefleyen temel bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/SzABfYt92Ro" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Hammer Curl</h3>
+                    <p class="exercise-description">Biceps ve forearm kaslarını geliştiren bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/yt7SDrIt9tE" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Tricep Dips</h3>
+                    <p class="exercise-description">Triceps kaslarını hedefleyen bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/gyf5CHeC0bE" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Skull Crushers</h3>
+                    <p class="exercise-description">Triceps geliştirmek için etkili bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/l9wzO_5ohkM" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Close-Grip Bench Press</h3>
+                    <p class="exercise-description">Triceps için etkili bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/0Sz0A9LpaD4" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Concentration Curl</h3>
+                    <p class="exercise-description">Biceps kaslarını izole eden bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/88cnv-dchAY" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Cable Tricep Extension</h3>
+                    <p class="exercise-description">Triceps kaslarını çalıştıran bir kablo egzersizi.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Karın -->
+        <div class="tab-content" id="core">
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/KfYcvwXvYqs" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Plank</h3>
+                    <p class="exercise-description">Karın kaslarını güçlendiren temel bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/5HqxwLz5S4Q" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Russian Twist</h3>
+                    <p class="exercise-description">Karın kaslarını yanlara doğru çalıştıran bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/1fJ4D4Er8RU" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Leg Raise</h3>
+                    <p class="exercise-description">Alt karın kaslarını hedefleyen bir hareket.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/x9FhgsU9Vh0" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Bicycle Crunch</h3>
+                    <p class="exercise-description">Karın kaslarını çalıştıran çok etkili bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ZL65xL5UlgI" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Mountain Climbers</h3>
+                    <p class="exercise-description">Karın ve kardiyo kaslarını çalıştıran bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/J2jxZl5h9UQ" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Ab Rollout</h3>
+                    <p class="exercise-description">Karın kaslarını izole eden bir egzersiz.</p>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/2BqsDZZosDU" allowfullscreen></iframe>
+                </div>
+                <div class="exercise-info">
+                    <h3 class="exercise-name">Crunches</h3>
+                    <p class="exercise-description">Klasik karın kası egzersizi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                // Show the clicked tab's content
+                const activeTab = document.getElementById(tab.getAttribute('data-tab'));
+                activeTab.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
